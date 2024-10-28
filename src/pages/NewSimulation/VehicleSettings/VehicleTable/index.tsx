@@ -21,11 +21,8 @@ const VehicleTable = ({
   const [topTableCell, setTopTableCell] = React.useState<string[]>([
     "Tipo do veículo",
     "Capacidade de carga",
-    "Ações",
   ]);
   const { config } = React.useContext(ConfigContext);
-
-  const handleRemoveVehicle = (index: number) => {};
 
   const getTableRows = () => {
     return config?.vehicles?.map((vehicle, index) => {
@@ -33,12 +30,6 @@ const VehicleTable = ({
         <tr key={index}>
           <td>{vehicle?.vehicleType}</td>
           <td>{vehicle?.payloadCapacity} kg</td>
-          <td>
-            <DeleteIcon
-              color="error"
-              onClick={() => handleRemoveVehicle(index)}
-            />
-          </td>
         </tr>
       );
     });
@@ -53,19 +44,7 @@ const VehicleTable = ({
           ))}
         </tr>
       </thead>
-      <tbody>
-        {getTableRows()?.length === 0 ? (
-          <div
-            style={{
-              padding: "16px",
-            }}
-          >
-            <Typography>Nenhum veículo adicionado.</Typography>
-          </div>
-        ) : (
-          getTableRows()
-        )}
-      </tbody>
+      <tbody>{getTableRows()}</tbody>
     </Table>
   );
 };

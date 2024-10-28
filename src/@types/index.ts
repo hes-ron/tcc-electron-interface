@@ -1,3 +1,5 @@
+import dayjs, { Dayjs } from "dayjs";
+
 export interface ISettingConfig {
   config: IConfigFile;
   setConfig: React.Dispatch<React.SetStateAction<IConfigFile>>;
@@ -19,7 +21,7 @@ export interface IGeneralSettings {
 }
 
 export interface IRouteSettings {
-  tripStartTime: number;
+  tripStartTime: string;
   toleranceArrival: number;
   timeAvoidMax: number;
   rayConsiderable: number;

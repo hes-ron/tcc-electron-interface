@@ -4,6 +4,7 @@ import { app, BrowserWindow } from "electron";
 // whether you're running in development or production).
 declare const INTERFACE_WEBPACK_ENTRY: string;
 declare const INTERFACE_PRELOAD_WEBPACK_ENTRY: string;
+import { ipcMain } from "electron";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require("electron-squirrel-startup")) {
@@ -18,8 +19,10 @@ const createWindow = (): void => {
       preload: INTERFACE_PRELOAD_WEBPACK_ENTRY,
       nodeIntegration: true,
       contextIsolation: false,
+      webSecurity: false,
     },
   });
+
   mainWindow.maximize();
   mainWindow.show();
 
@@ -41,6 +44,8 @@ app.on("window-all-closed", () => {
     app.quit();
   }
 });
+
+ipcMain.on("close", () => app.quit());
 
 app.on("activate", () => {
   // On OS X it's common to re-create a window in the app when the

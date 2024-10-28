@@ -19,6 +19,7 @@ import Map from "../Map";
 import { defaultConfig } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import * as S from "./styles";
+import { SidebarContext } from "../../contexts/sidebar";
 
 const steps = [
   "Configurações gerais",
@@ -29,7 +30,6 @@ const steps = [
 export default function Stepper() {
   const [activeStep, setActiveStep] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-  const navigate = useNavigate();
   const { config, setConfig } = React.useContext(ConfigContext);
   const [generalSettings, setGeneralSettings] = React.useState(
     defaultConfig?.generalSettings as IGeneralSettings
@@ -40,9 +40,13 @@ export default function Stepper() {
   const [vehicleSettings, setVehicleSettings] = React.useState(
     defaultConfig?.vehicleSettings as IVehicleSettings
   );
+  const { sideBarOpen } = React.useContext(SidebarContext);
+  const navigate = useNavigate();
+
+  console.log("config", config);
 
   const style = {
-    position: "absolute" as "absolute",
+    position: "absolute",
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
@@ -150,7 +154,19 @@ export default function Stepper() {
         {stepContent[activeStep]}
 
         <S.ButtonsWrapper>
-          <div>
+          <div
+            style={
+              sideBarOpen
+                ? {
+                    width: "100%",
+                    marginLeft: "104px",
+                  }
+                : {
+                    width: "100%",
+                    marginLeft: "274px",
+                  }
+            }
+          >
             <Button disabled={activeStep === 0} onClick={handleBack}>
               Voltar
             </Button>

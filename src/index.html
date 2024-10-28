@@ -2,9 +2,13 @@
 <html>
   <head>
     <meta charset="UTF-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="script-src 'self' https://maps.googleapis.com 'unsafe-inline' 'unsafe-eval'; object-src 'self';"
+    />
     <title>Hello World!</title>
   </head>
-  <body style="height: 100%; max-width: none">
+  <body style="height: 100%; max-width: none; padding: 0px">
     <div id="root" style="height: 100%"></div>
   </body>
 </html>

@@ -4,6 +4,7 @@ import { IGeneralSettings } from "../../../../@types";
 import InfoIcon from "@mui/icons-material/Info";
 
 import { Tooltip } from "@mui/joy";
+import { tooltipsTexts } from "../../../../utils/tooltipsTexts";
 
 import * as S from "./styles";
 import {
@@ -29,7 +30,7 @@ export default function SignalPriority({
         <div style={{ display: "flex", alignItems: "center" }}>
           <FormLabel>Prioridade de sinal</FormLabel>
 
-          <Tooltip title="Habilita a função de filtro por sombreamento na simulação.">
+          <Tooltip title={tooltipsTexts.prioridadeSinal}>
             <InfoIcon color="info" style={{ marginLeft: 16 }} />
           </Tooltip>
         </div>

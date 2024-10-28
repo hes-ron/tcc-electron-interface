@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const Content = styled.div`
   padding: 16px;
+  padding-bottom: 48px;
 `;
 
 export const RouteSettingsForm = styled.div`

@@ -1,7 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import { IConfigFile } from "../../@types";
 import { defaultConfig } from "../../utils";
-import { saveAs } from "file-saver";
 import * as XLSX from "xlsx";
 
 const fs = window.require("fs");
@@ -10,13 +9,6 @@ interface ConfigContextType {
   config: IConfigFile;
   setConfig: (config: any) => void;
 }
-
-// const configFile = fs.readFileSync("./configFile.txt", "utf8");
-
-// var initialConfig =
-//   configFile.length > 0
-//     ? (JSON.parse(configFile) as IConfigFile)
-//     : defaultConfig;
 
 export const ConfigContext = createContext<ConfigContextType>({
   config: defaultConfig,

@@ -32,40 +32,48 @@ export default function VehicleResumeCard() {
       <CardContent
         sx={{
           display: "flex",
-          flex: "flex-wrap",
+          flexWrap: "wrap",
         }}
       >
-        <S.InputWrapper>
-          <TextField
-            label="Quantia carregada"
-            value={config?.vehicleSettings.loadedCapacity}
-            type="number"
-          />
-        </S.InputWrapper>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <S.InputWrapper>
+            <TextField
+              disabled
+              label="Quantia carregada"
+              value={config?.vehicleSettings.loadedCapacity}
+              type="number"
+            />
+          </S.InputWrapper>
 
-        <S.InputWrapper>
-          <TextField
-            label="Tipo de veículo"
-            value={config?.vehicleSettings.vehicleType}
-            type="text"
-          />
-        </S.InputWrapper>
+          <S.InputWrapper>
+            <TextField
+              disabled
+              label="Tipo de veículo"
+              value={config?.vehicleSettings.vehicleType}
+              type="text"
+            />
+          </S.InputWrapper>
+        </div>
 
-        <S.InputWrapper>
-          <TextField
-            label="Velocidade máxima"
-            value={config?.vehicleSettings.maximumSpeed}
-            type="number"
-          />
-        </S.InputWrapper>
+        <div style={{ display: "flex", gap: "8px" }}>
+          <S.InputWrapper>
+            <TextField
+              disabled
+              label="Velocidade máxima"
+              value={config?.vehicleSettings.maximumSpeed}
+              type="number"
+            />
+          </S.InputWrapper>
 
-        <S.InputWrapper>
-          <TextField
-            label="Velocidade mínima"
-            value={config?.vehicleSettings.minimumSpeed}
-            type="number"
-          />
-        </S.InputWrapper>
+          <S.InputWrapper>
+            <TextField
+              disabled
+              label="Velocidade mínima"
+              value={config?.vehicleSettings.minimumSpeed}
+              type="number"
+            />
+          </S.InputWrapper>
+        </div>
       </CardContent>
     </Card>
   );

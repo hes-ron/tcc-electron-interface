@@ -77,6 +77,7 @@ const Sidebar = () => {
         left: 0,
         top: 0,
         height: "100vh",
+        zIndex: 1,
         "> div": {
           display: "flex",
           flexDirection: "column",

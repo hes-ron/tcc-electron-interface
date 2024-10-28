@@ -14,7 +14,7 @@ export const defaultConfig: IConfigFile = {
     },
   },
   routeSettings: {
-    tripStartTime: 4.0,
+    tripStartTime: "00:29:50",
     toleranceArrival: 20,
     timeAvoidMax: 0,
     rayConsiderable: 10,
@@ -96,3 +96,43 @@ export const defaultConfig: IConfigFile = {
     },
   ],
 };
+
+interface RouteData {
+  origin: google.maps.LatLng | google.maps.LatLngLiteral | google.maps.Place;
+  destination:
+    | google.maps.LatLng
+    | google.maps.LatLngLiteral
+    | google.maps.Place
+    | string;
+  waypoints: google.maps.DirectionsWaypoint[];
+}
+
+export function parseRoute(url: string) {
+  // Extrai todas as coordenadas da URL
+  const regex = /-?\d+\.\d+,-?\d+\.\d+/g;
+  const matches = url.match(regex);
+
+  if (matches && matches.length >= 2) {
+    // Define a primeira coordenada como origem e a última como destino
+    const [originLat, originLng] = matches[0].split(",").map(Number);
+    const origin = new google.maps.LatLng(originLat, originLng);
+
+    const [destinationLat, destinationLng] = matches[matches.length - 1]
+      .split(",")
+      .map(Number);
+    const destination = new google.maps.LatLng(destinationLat, destinationLng);
+
+    // Define as coordenadas intermediárias como waypoints
+    const waypoints = matches.slice(1, -1).map((coordinate) => {
+      const [lat, lng] = coordinate.split(",").map(Number);
+      return {
+        location: new google.maps.LatLng(lat, lng),
+        stopover: true,
+      };
+    });
+
+    return { origin, destination, waypoints };
+  } else {
+    throw new Error("URL inválida ou faltando coordenadas");
+  }
+}

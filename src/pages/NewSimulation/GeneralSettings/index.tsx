@@ -7,6 +7,7 @@ import SignalPriority from "./SignalPriority";
 import Operators from "./Operators";
 import { FormControlLabel, FormLabel, Switch } from "@mui/material";
 
+import { tooltipsTexts } from "../../../utils/tooltipsTexts";
 import * as S from "./styles";
 
 interface GeneralSettingsProps {
@@ -41,7 +42,7 @@ export default function GeneralSettings({
               labelPlacement="start"
             />
 
-            <Tooltip title="Habilita a função de filtro por sombreamento na simulação.">
+            <Tooltip title={tooltipsTexts.sombreamento}>
               <InfoIcon color="info" style={{ marginLeft: 16 }} />
             </Tooltip>
           </S.InputItem>
@@ -65,7 +66,7 @@ export default function GeneralSettings({
               labelPlacement="start"
             />
 
-            <Tooltip title="Habilita a função de filtro por área indevida.">
+            <Tooltip title={tooltipsTexts.areaIndevida}>
               <InfoIcon color="info" style={{ marginLeft: 16 }} />
             </Tooltip>
           </S.InputItem>
@@ -88,7 +89,7 @@ export default function GeneralSettings({
               labelPlacement="start"
             />
 
-            <Tooltip title="Habilita a simulação a calcular a rota com chuva.">
+            <Tooltip title={tooltipsTexts.chuva}>
               <InfoIcon color="info" style={{ marginLeft: 16 }} />
             </Tooltip>
           </S.InputItem>

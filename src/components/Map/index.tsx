@@ -48,11 +48,15 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
   const [map, setMap] = React.useState(null);
 
   useEffect(() => {
+    setMarkers(routeSettings.points);
+  }, [routeSettings.points]);
+
+  useEffect(() => {
     setRouteSettings({
       ...routeSettings,
       points: markers,
     });
-  }, [markers, setRouteSettings]);
+  }, [markers]);
 
   useEffect(() => {
     setRouteSettings({
@@ -61,18 +65,14 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
     });
   }, [zones, setRouteSettings]);
 
-  // const onLoad = React.useCallback(function callback(map: google.maps.Map) {
-  //   const bounds = new window.google.maps.LatLngBounds(center);
-  //   map.fitBounds(bounds);
-
-  //   setMap(map);
-  // }, []);
-
   const onUnmount = React.useCallback(function callback() {
     setMap(null);
   }, []);
 
-  const handleAddMarker = React.useCallback((e: any) => {
+  console.log("markers", markers);
+  console.log("routeSettings", routeSettings.points);
+
+  const handleAddMarker = (e: any) => {
     setMarkers((current: any) => [
       ...current,
       {
@@ -84,7 +84,7 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
         manual: 0,
       },
     ]);
-  }, []);
+  };
 
   const handleToggle = (value: string) => {
     if (value === "addPoint") {
@@ -135,7 +135,7 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
         <ToggleButton
           sx={{
             backgroundColor: "#0B6BCB !important",
-            color: "white",
+            color: "white !important",
             "&:hover": { backgroundColor: "#0B6BCB" },
           }}
           value="addPoint"

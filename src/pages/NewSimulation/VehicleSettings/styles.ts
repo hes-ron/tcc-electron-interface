@@ -4,7 +4,7 @@ export const Container = styled.div``;
 
 export const InputWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  gap: 16px;
 
   > div {
     margin-bottom: 16px;

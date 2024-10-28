@@ -7,9 +7,13 @@ import InfoIcon from "@mui/icons-material/Info";
 
 import { TextField, Switch, FormControlLabel } from "@mui/material";
 import PointsData from "./PointsData";
-import * as S from "./styles";
 import { ConfigContext } from "../../../contexts/config";
 import ZoneData from "./ZoneData";
+import { LocalizationProvider, TimeField } from "@mui/x-date-pickers";
+import dayjs from "dayjs";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { tooltipsTexts } from "../../../utils/tooltipsTexts";
+import * as S from "./styles";
 
 interface RouteSettingsProps {
   routeSettings: IRouteSettings;
@@ -33,20 +37,22 @@ const RouteSettings = ({
       <S.RouteSettingsForm>
         <div>
           <S.InputItem>
-            <TextField
-              label="Horário do início da viagem"
-              type="number"
-              size="small"
-              value={routeSettings?.tripStartTime}
-              onChange={(event) => {
-                setRouteSettings({
-                  ...routeSettings,
-                  tripStartTime: parseInt(event.target.value),
-                });
-              }}
-            />
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <TimeField
+                label="Horário de início da rota"
+                defaultValue={dayjs(new Date())}
+                format="HH:mm"
+                ampm={false}
+                onChange={(time) => {
+                  setRouteSettings({
+                    ...routeSettings,
+                    tripStartTime: time.format("HH:mm"),
+                  });
+                }}
+              />
+            </LocalizationProvider>
 
-            <Tooltip title="Habilita a função de filtro por área indevida.">
+            <Tooltip title={tooltipsTexts.horarioInicioRota}>
               <InfoIcon color="info" style={{ marginLeft: 16 }} />
             </Tooltip>
           </S.InputItem>
@@ -57,6 +63,7 @@ const RouteSettings = ({
               type="number"
               size="small"
               value={routeSettings?.toleranceArrival}
+              helperText="Em minutos"
               onChange={(event) => {
                 setRouteSettings({
                   ...routeSettings,
@@ -65,7 +72,7 @@ const RouteSettings = ({
               }}
             />
 
-            <Tooltip title="Tolerância de tempo para aguardar até abrir o estabelecimento (minutos)">
+            <Tooltip title={tooltipsTexts.toleranciaChegada}>
               <InfoIcon color="info" style={{ marginLeft: 16 }} />
             </Tooltip>
           </S.InputItem>
@@ -76,6 +83,7 @@ const RouteSettings = ({
               type="number"
               size="small"
               value={routeSettings?.timeAvoidMax}
+              helperText="Em minutos"
               onChange={(event) => {
                 setRouteSettings({
                   ...routeSettings,
@@ -84,7 +92,7 @@ const RouteSettings = ({
               }}
             />
 
-            <Tooltip title="Tempo maximo para aguardar em area indevida">
+            <Tooltip title={tooltipsTexts.tempoMaximoAreaIndevida}>
               <InfoIcon color="info" style={{ marginLeft: 16 }} />
             </Tooltip>
           </S.InputItem>
@@ -95,6 +103,7 @@ const RouteSettings = ({
               type="number"
               size="small"
               value={routeSettings?.rayConsiderable}
+              helperText="Em quilômetros"
               onChange={(event) => {
                 setRouteSettings({
                   ...routeSettings,
@@ -103,7 +112,7 @@ const RouteSettings = ({
               }}
             />
 
-            <Tooltip title="Distancia em raio para considerar testes em cada ponto">
+            <Tooltip title={tooltipsTexts.raioConsideravel}>
               <InfoIcon color="info" style={{ marginLeft: 16 }} />
             </Tooltip>
           </S.InputItem>
@@ -126,7 +135,7 @@ const RouteSettings = ({
               labelPlacement="top"
             />
 
-            <Tooltip title="Habilita a janela de tempo">
+            <Tooltip title={tooltipsTexts.habilitarJanelaTempo}>
               <InfoIcon color="info" style={{ marginLeft: 16 }} />
             </Tooltip>
           </S.InputItem>

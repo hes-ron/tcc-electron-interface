@@ -2,6 +2,7 @@ import React from "react";
 
 import { IGeneralSettings, IOperators } from "../../../../@types";
 import { Tooltip } from "@mui/joy";
+import { tooltipsTexts } from "../../../../utils/tooltipsTexts";
 import InfoIcon from "@mui/icons-material/Info";
 
 import {
@@ -29,7 +30,7 @@ export default function Operators({
         <div style={{ display: "flex", alignItems: "center" }}>
           <FormLabel>Operadora</FormLabel>
 
-          <Tooltip title="Habilita a função de filtro por sombreamento na simulação.">
+          <Tooltip title={tooltipsTexts.operadora}>
             <InfoIcon color="info" style={{ marginLeft: 16 }} />
           </Tooltip>
         </div>
@@ -40,18 +41,16 @@ export default function Operators({
             (key) => generalSettings?.operators[key as keyof IOperators]
           )}
           onChange={(event) => {
-            generalSettings.operators.opClaro = false;
-            generalSettings.operators.opOi = false;
-            generalSettings.operators.opTim = false;
-            generalSettings.operators.opVivo = false;
+            const selectedOperator = event.target.value as keyof IOperators;
+
+            // Atualiza o estado com todas as operadoras como false, exceto a selecionada
             setGeneralSettings({
               ...generalSettings,
               operators: {
-                ...generalSettings.operators,
-                [event.target.value]:
-                  !generalSettings.operators[
-                    event.target.value as keyof IOperators
-                  ],
+                opClaro: selectedOperator === "opClaro",
+                opOi: selectedOperator === "opOi",
+                opTim: selectedOperator === "opTim",
+                opVivo: selectedOperator === "opVivo",
               },
             });
           }}

@@ -6,9 +6,12 @@ import GeneralResumeCard from "./GeneralResumeCard";
 import RouteResumeCard from "./RouteResumeCard";
 import VehicleResumeCard from "./VehicleResumeCard";
 import * as S from "./styles";
+import { Button } from "@mui/joy";
+import { SidebarContext } from "../../contexts/sidebar";
 
 const Resume = () => {
   const navigate = useNavigate();
+  const { sideBarOpen } = React.useContext(SidebarContext);
 
   const breadCrumbs = [
     {
@@ -40,6 +43,20 @@ const Resume = () => {
           <RouteResumeCard />
         </div>
       </S.CardsWrapper>
+
+      <S.FixedOptions>
+        <div
+          style={
+            sideBarOpen
+              ? { width: "100%", marginLeft: "104px" }
+              : { width: "100%", marginLeft: "274px" }
+          }
+        >
+          <Button color="success" fullWidth onClick={() => navigate("/result")}>
+            Visualizar resultado da rota
+          </Button>
+        </div>
+      </S.FixedOptions>
     </DefaultPage>
   );
 };

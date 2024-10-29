@@ -1,5 +1,10 @@
 import React from "react";
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import {
+  Circle,
+  GoogleMap,
+  Marker,
+  useJsApiLoader,
+} from "@react-google-maps/api";
 import { ConfigContext } from "../../../contexts/config";
 
 const center = {
@@ -54,6 +59,21 @@ const MapResume = ({ containerStyle }: MapProps) => {
           position={{ lat: marker.lat, lng: marker.lng }}
           onClick={() => {
             console.log(marker);
+          }}
+        />
+      ))}
+
+      {config?.routeSettings?.zones?.map((zone, index) => (
+        <Circle
+          key={index}
+          center={{ lat: zone.lat, lng: zone.lng }}
+          radius={zone.radius}
+          options={{
+            fillColor: "red",
+            fillOpacity: 0.2,
+            strokeColor: "red",
+            strokeOpacity: 0.5,
+            strokeWeight: 1,
           }}
         />
       ))}

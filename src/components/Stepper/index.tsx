@@ -158,11 +158,11 @@ export default function Stepper() {
             style={
               sideBarOpen
                 ? {
-                    width: "100%",
+                    width: "90%",
                     marginLeft: "104px",
                   }
                 : {
-                    width: "100%",
+                    width: "90%",
                     marginLeft: "274px",
                   }
             }
@@ -175,9 +175,11 @@ export default function Stepper() {
             </Button>
           </div>
 
-          <Button onClick={handleNext}>
-            {activeStep === 2 ? "Ver resumo" : "Continuar"}
-          </Button>
+          <div style={{ width: "10%" }}>
+            <Button fullWidth onClick={handleNext}>
+              {activeStep === 2 ? "Ver resumo" : "Continuar"}
+            </Button>
+          </div>
         </S.ButtonsWrapper>
 
         <Modal

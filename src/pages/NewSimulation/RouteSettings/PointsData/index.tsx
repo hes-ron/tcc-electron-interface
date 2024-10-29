@@ -127,10 +127,14 @@ const PointsData = ({
             </>
           )}
           <td>
-            <DeleteIcon
-              color="error"
-              onClick={() => handleRemovePoint(index)}
-            />
+            {disabled ? (
+              <></>
+            ) : (
+              <DeleteIcon
+                color="error"
+                onClick={() => handleRemovePoint(index)}
+              />
+            )}
           </td>
         </tr>
       );

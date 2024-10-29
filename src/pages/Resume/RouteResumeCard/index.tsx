@@ -22,6 +22,7 @@ export default function RouteResumeCard() {
         mx: "auto",
         overflow: "auto",
         resize: "horizontal",
+        zIndex: 0,
       }}
     >
       <Typography

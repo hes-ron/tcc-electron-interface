@@ -35,7 +35,9 @@ const MapWithRoute = ({ linkUrl }: { linkUrl: string }) => {
     <div style={{ marginBottom: "16px" }}>
       <GoogleMap
         mapContainerStyle={{ width: "100%", height: "500px" }}
-        center={origin}
+        options={{
+          streetViewControl: false,
+        }}
         zoom={10}
       >
         {directionsResponse && (

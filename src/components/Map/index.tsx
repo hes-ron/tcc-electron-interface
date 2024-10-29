@@ -4,7 +4,6 @@ import {
   GoogleMap,
   Marker,
   useJsApiLoader,
-  InfoBox,
 } from "@react-google-maps/api";
 import { IRouteSettings } from "../../@types";
 import { ToggleButton, ToggleButtonGroup } from "@mui/material";
@@ -43,13 +42,15 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: "AIzaSyBLT06LgB4p4qFuxOsZGyMjhGgkcU7kCFI",
+    language: "ptBr",
   });
 
   const [map, setMap] = React.useState(null);
 
   useEffect(() => {
     setMarkers(routeSettings.points);
-  }, [routeSettings.points]);
+    setZones(routeSettings.zones);
+  }, [routeSettings.points, routeSettings.zones]);
 
   useEffect(() => {
     setRouteSettings({
@@ -63,14 +64,11 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
       ...routeSettings,
       zones: zones,
     });
-  }, [zones, setRouteSettings]);
+  }, [zones]);
 
   const onUnmount = React.useCallback(function callback() {
     setMap(null);
   }, []);
-
-  console.log("markers", markers);
-  console.log("routeSettings", routeSettings.points);
 
   const handleAddMarker = (e: any) => {
     setMarkers((current: any) => [
@@ -94,7 +92,7 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
     }
   };
 
-  const handleAddZone = React.useCallback((e: any) => {
+  const handleAddZone = (e: any) => {
     setZones((current: any) => [
       ...current,
       {
@@ -103,7 +101,7 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
         radius: 1000,
       },
     ]);
-  }, []);
+  };
 
   const handleAddMarkerOrZone = (e: any) => {
     if (addingPoint) {
@@ -118,9 +116,11 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
       mapContainerStyle={containerStyle}
       center={center}
       zoom={9}
-      // onLoad={onLoad}
       onClick={handleAddMarkerOrZone}
       onUnmount={onUnmount}
+      options={{
+        streetViewControl: false,
+      }}
     >
       <ToggleButtonGroup
         value={addingPoint ? "addPoint" : "addZone"}
@@ -135,7 +135,7 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
         <ToggleButton
           sx={{
             backgroundColor: "#0B6BCB !important",
-            color: "white !important",
+            color: "white",
             "&:hover": { backgroundColor: "#0B6BCB" },
           }}
           value="addPoint"
@@ -159,10 +159,6 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
           key={index}
           center={{ lat: zone.lat, lng: zone.lng }}
           radius={zone.radius}
-          // editable
-          // onRadiusChanged={() => {
-          //   console.log("Raio alterado", zone.radius);
-          // }}
           options={{
             fillColor: "red",
             fillOpacity: 0.2,

@@ -29,6 +29,7 @@ export default function Card({
 
   return (
     <MaterialCard
+      onClick={() => navigate(buttonOnClickUrl)}
       data-resizable
       sx={{
         textAlign: "center",
@@ -37,6 +38,7 @@ export default function Card({
         overflow: "auto",
         resize: "horizontal",
         "--icon-size": "100px",
+        cursor: "pointer",
       }}
     >
       <CardOverflow variant="solid" sx={{ backgroundColor: color }}>

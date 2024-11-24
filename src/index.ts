@@ -28,7 +28,7 @@ const createWindow = (): void => {
 
   mainWindow.loadURL(INTERFACE_WEBPACK_ENTRY);
 
-  mainWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
 };
 
 // This method will be called when Electron has finished

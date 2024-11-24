@@ -35,26 +35,46 @@ const Result = () => {
 
   const navigate = useNavigate();
 
+  const testFicticio = `Saida: 4:0
+  Chegada: dia 1 6:51:49
+  Total espera: 1:1:38
+  Total ociosidade: 0:0
+  Total da viagem: 2:51:49
+  Tempo de sombreamento: 0:56:37
+  Tempo em areas indevidas: 2:49:1
+  
+  Velocidade media: 25km
+  Velocidade maxima: 72 km
+  
+  Distancia percorrida: 46.38 km
+  Link 1: https://www.google.com/maps/dir/-27.088750495967897,-52.61733544799637/-26.594750915192982,-53.519851563084465/-26.534458124621814,+-53.33670566400308/-26.457189,+-53.5108209/-26.594750915192982,-53.519851563084465/-26.534458124621814,+-53.33670566400308/-26.534458124621814,-53.33670566400308/
+  
+  Link completo: https://www.google.com/maps/dir/-27.088750495967897,-52.61733544799637/-26.96181924885154,-52.533229386505035/-26.874812342579798,-52.408703419943166/-27.151617340694017,-52.30949092875697/-27.075300402151115,-52.458105526098066/-27.09238537995322,-52.616110602783245/
+  
+  Tempo total do simulador: 8:16:9
+  Tempo total de simulação : 1.800 minutos
+  `;
+
   useEffect(() => {
-    const caminhoArquivo = "./resultFile.txt";
+    // const caminhoArquivo = "./resultFile.txt";
 
-    fs.readFile(caminhoArquivo, (err: any, data: any) => {
-      const raw = data.toString().split("\n");
+    // fs.readFile(caminhoArquivo, (err: any, data: any) => {
+    const raw = testFicticio.split("\n");
 
-      setResults({
-        horarioSaida: raw[0].split(": ")[1],
-        horarioChegada: raw[1].split(": ")[1],
-        tempoTotalEspera: raw[2].split(": ")[1],
-        tempoTotalOciosidade: raw[3].split(": ")[1],
-        tempoTotalViagem: raw[4].split(": ")[1],
-        tempoSombreamento: raw[5].split(": ")[1],
-        tempoAreasIndevidas: raw[6].split(": ")[1],
-        velocidadeMedia: raw[8].split(": ")[1],
-        velocidadeMaxima: raw[9].split(": ")[1],
-        distanciaTotalPercorrida: raw[11].split(": ")[1],
-        linkRota: raw[14].split(": ")[1],
-      });
+    setResults({
+      horarioSaida: raw[0].split(": ")[1],
+      horarioChegada: raw[1].split(": ")[1],
+      tempoTotalEspera: raw[2].split(": ")[1],
+      tempoTotalOciosidade: raw[3].split(": ")[1],
+      tempoTotalViagem: raw[4].split(": ")[1],
+      tempoSombreamento: raw[5].split(": ")[1],
+      tempoAreasIndevidas: raw[6].split(": ")[1],
+      velocidadeMedia: raw[8].split(": ")[1],
+      velocidadeMaxima: raw[9].split(": ")[1],
+      distanciaTotalPercorrida: raw[11].split(": ")[1],
+      linkRota: raw[14].split(": ")[1],
     });
+    // });
   }, []);
 
   const breadCrumbs = [

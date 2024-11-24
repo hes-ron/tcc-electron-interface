@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 import React, { useEffect } from "react";
 
 import { Switch, Table } from "@mui/joy";
@@ -59,7 +60,14 @@ const ZoneData = ({
             </S.InputItem>
           </td>
           <td>
-            <DeleteIcon color="error" onClick={() => handleRemoveZone(index)} />
+            {disabled ? (
+              <></>
+            ) : (
+              <DeleteIcon
+                color="error"
+                onClick={() => handleRemoveZone(index)}
+              />
+            )}
           </td>
         </tr>
       );

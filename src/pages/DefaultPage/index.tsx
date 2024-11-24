@@ -15,6 +15,7 @@ const DefaultPage = ({ children }: DefaultPage) => {
       style={{
         display: "flex",
         height: "100%",
+        paddingBottom: "200px",
       }}
     >
       <Sidebar />

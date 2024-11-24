@@ -6,13 +6,16 @@ import Typography from "@mui/joy/Typography";
 import CheckIcon from "@mui/icons-material/CheckOutlined";
 import { FormControlLabel, Checkbox, TextField } from "@mui/material";
 import { ConfigContext } from "../../../contexts/config";
-import * as S from "../styles";
 import PointsData from "../../../pages/NewSimulation/RouteSettings/PointsData";
 import MapResume from "../MapResume";
 import ZoneData from "../../../pages/NewSimulation/RouteSettings/ZoneData";
+import * as S from "../styles";
+import { TimeField } from "@mui/x-date-pickers";
 
 export default function RouteResumeCard() {
   const { config } = React.useContext(ConfigContext);
+
+  console.log(config?.routeSettings?.tripStartTime);
 
   return (
     <Card
@@ -44,8 +47,8 @@ export default function RouteResumeCard() {
           <S.InputWrapper>
             <TextField
               disabled
-              label="Horário do início da viagem"
-              type="number"
+              label="Horário de início da viagem"
+              type="text"
               size="small"
               value={config?.routeSettings?.tripStartTime}
             />

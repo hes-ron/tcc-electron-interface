@@ -7,6 +7,7 @@ import CardContent from "@mui/joy/CardContent";
 import CardOverflow from "@mui/joy/CardOverflow";
 import Typography from "@mui/joy/Typography";
 import { useNavigate } from "react-router-dom";
+import { SidebarContext } from "../../contexts/sidebar";
 
 interface CardProps {
   title: string;
@@ -26,10 +27,14 @@ export default function Card({
   color,
 }: CardProps) {
   const navigate = useNavigate();
+  const { setPage } = React.useContext(SidebarContext);
 
   return (
     <MaterialCard
-      onClick={() => navigate(buttonOnClickUrl)}
+      onClick={() => {
+        navigate(buttonOnClickUrl);
+        setPage(buttonOnClickUrl);
+      }}
       data-resizable
       sx={{
         textAlign: "center",

@@ -67,6 +67,8 @@ const Sidebar = () => {
     },
   ];
 
+  console.log(page);
+
   return (
     <SidebarPRO
       collapsed={sideBarOpen}

@@ -47,41 +47,44 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
 
   const [map, setMap] = React.useState(null);
 
-  useEffect(() => {
-    setMarkers(routeSettings.points);
-    setZones(routeSettings.zones);
-  }, [routeSettings.points, routeSettings.zones]);
+  // useEffect(() => {
+  //   setMarkers(routeSettings.points);
+  //   setZones(routeSettings.zones);
+  // }, [routeSettings.points, routeSettings.zones]);
 
-  useEffect(() => {
-    setRouteSettings({
-      ...routeSettings,
-      points: markers,
-    });
-  }, [markers]);
+  // useEffect(() => {
+  //   setRouteSettings({
+  //     ...routeSettings,
+  //     points: markers,
+  //   });
+  // }, [markers]);
 
-  useEffect(() => {
-    setRouteSettings({
-      ...routeSettings,
-      zones: zones,
-    });
-  }, [zones]);
+  // useEffect(() => {
+  //   setRouteSettings({
+  //     ...routeSettings,
+  //     zones: zones,
+  //   });
+  // }, [zones]);
 
   const onUnmount = React.useCallback(function callback() {
     setMap(null);
   }, []);
 
   const handleAddMarker = (e: any) => {
-    setMarkers((current: any) => [
-      ...current,
-      {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-        unload: 0,
-        start: 0,
-        end: 0,
-        manual: 0,
-      },
-    ]);
+    setRouteSettings({
+      ...routeSettings,
+      points: [
+        ...routeSettings.points,
+        {
+          lat: e.latLng.lat(),
+          lng: e.latLng.lng(),
+          unload: 0,
+          start: 0,
+          end: 0,
+          manual: 0,
+        },
+      ],
+    });
   };
 
   const handleToggle = (value: string) => {
@@ -93,14 +96,17 @@ const Map = ({ containerStyle, routeSettings, setRouteSettings }: MapProps) => {
   };
 
   const handleAddZone = (e: any) => {
-    setZones((current: any) => [
-      ...current,
-      {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-        radius: 1000,
-      },
-    ]);
+    setRouteSettings({
+      ...routeSettings,
+      zones: [
+        ...routeSettings.zones,
+        {
+          lat: e.latLng.lat(),
+          lng: e.latLng.lng(),
+          radius: 1000,
+        },
+      ],
+    });
   };
 
   const handleAddMarkerOrZone = (e: any) => {
